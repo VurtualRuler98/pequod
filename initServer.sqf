@@ -1,0 +1,1 @@
+[] remoteExecCall ['peq_func_init', pequod];
