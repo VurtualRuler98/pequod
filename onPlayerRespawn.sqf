@@ -1,1 +1,0 @@
-[_this select 0] spawn fulton_func_init;
