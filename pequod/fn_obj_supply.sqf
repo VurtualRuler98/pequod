@@ -5,7 +5,7 @@ if (!alive pequod_var_heli) exitWith {true};
 
 [pequod_var_heli,'This is Pequod, preparing for supply drop at the specified coordinates.'] remoteExec ['sideChat'];
 
-group pequod_var_heli setCombatMode "BLUE";
+group pequod_var_heli setCombatMode pequod_var_roe;
 [group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 {deleteWaypoint _x} forEach waypoints group pequod_var_heli;
 pequod_var_heli land "NONE";

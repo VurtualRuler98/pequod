@@ -8,7 +8,7 @@ _txt = markerText _marker;
 
 
 if (_txt=="Helicopter LZ") then {
-	group pequod_var_heli setCombatMode "BLUE";
+	group pequod_var_heli setCombatMode pequod_var_roe;
 	[pequod_var_heli,"This is Pequod, on route to specified LZ!"] remoteExec ["sideChat"];
 	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
@@ -23,7 +23,7 @@ if (_txt=="Helicopter LZ") then {
 
 
 if (_txt=="Helicopter Hover") then {
-	group pequod_var_heli setCombatMode "BLUE";
+	group pequod_var_heli setCombatMode pequod_var_roe;
 	[pequod_var_heli,'This is Pequod, on route to specified position!'] remoteExec ['sideChat'];
 	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
@@ -38,7 +38,7 @@ if (_txt=="Helicopter Hover") then {
 
 
 if (_txt=="Helicopter RTB") then {
-	group pequod_var_heli setCombatMode "BLUE";
+	group pequod_var_heli setCombatMode pequod_var_roe;
 	[pequod_var_heli,'This is Pequod, returning to base!'] remoteExec ['sideChat'];
 	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;

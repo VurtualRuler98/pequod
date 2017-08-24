@@ -2,7 +2,10 @@ class pequod {
 	class pequodFunctions {
 		file = "pequod";
 		class init {};
+		class init_map {postInit=1;};
 		class cmd {};
+		class roe {};
+		class acc {};
 		class spawn {};
 		class respawn {};
 		class obj_marker {};

@@ -4,13 +4,13 @@ if (pequod_var_heli emptyPositions "cargo" == 0) exitWith {
 	[pequod_var_heli,"This is Pequod, passenger space is full, can't recover fulton."] remoteExec ['sideChat'];
 };
 
-_chutes = nearestObjects [pequod_var_heli,["B_Parachute_02_F"],2000];
+_chutes = nearestObjects [pequod_var_heli,["B_Parachute_02_F"],5000];
 _chute = {if (_x getVariable "fulton_ischute") exitWith {_x}} forEach _chutes;
 
 if (isnil '_chute') then {
 	[pequod_var_heli,"This is Pequod, I can't see any fulton balloons."] remoteExec ['sideChat'];
 } else {
-	group pequod_var_heli setCombatMode "BLUE";
+	group pequod_var_heli setCombatMode pequod_var_roe;
 	[pequod_var_heli,'This is Pequod, recovering fulton!'] remoteExec ['sideChat'];
 	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;

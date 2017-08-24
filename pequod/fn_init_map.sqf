@@ -1,0 +1,1 @@
+{ private "_a"; _a = toArray _x; _a resize 7; if (toString _a == "pequod_" ) then { _x setMarkerAlphaLocal 0; } } forEach allMapMarkers; 
