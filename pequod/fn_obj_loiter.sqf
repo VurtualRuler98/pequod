@@ -3,7 +3,7 @@ _pos = param [0,[0,0,0],[[]],[2,3]];
 if (!alive pequod_var_heli) exitWith {true};
 
 [pequod_var_heli,'This is Pequod, heading to specified coordinates.'] remoteExec ['sideChat'];
-
+pequod_var_current_lz=nil;
 group pequod_var_heli setCombatMode pequod_var_roe;
 [group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 {deleteWaypoint _x} forEach waypoints group pequod_var_heli;

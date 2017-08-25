@@ -4,5 +4,9 @@ _gunner = gunner pequod_var_heli;
 sleep 10;
 deleteVehicle _driver;
 deleteVehicle _gunner;
+[pequod_var_heli] spawn {
+	sleep 30;
+	deleteVehicle (_this select 0);
+};
 [] call pequod_fnc_spawn;
 true

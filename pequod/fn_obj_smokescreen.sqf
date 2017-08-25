@@ -3,7 +3,7 @@ _pos = param [0,[0,0,0],[[]],[2,3]];
 if (!alive pequod_var_heli) exitWith {true};
 
 [pequod_var_heli,'This is Pequod, preparing to deploy smokescreen at the specified coordinates.'] remoteExec ['sideChat'];
-
+	pequod_var_current_lz=nil;
 group pequod_var_heli setCombatMode pequod_var_roe;
 [group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
 {deleteWaypoint _x} forEach waypoints group pequod_var_heli;
@@ -16,7 +16,7 @@ _wp setWaypointStatements ["true","[pequod_var_heli,'This is Pequod, dropping sm
 
 _wp2 = group pequod_var_heli addWaypoint [[(_pos select 0)+100*sin(_dir),(_pos select 1)+100*cos(_dir),0],1];
 _wp2 setWaypointType "MOVE";
-_wp2 setWaypointStatements ["true","[] call pequod_fnc_smokescreen"];
+call compile format ["_wp2 setWaypointStatements [""true"",""[%1] call pequod_fnc_smokescreen""]",_pos];
 
 
 _wp3 = group pequod_var_heli addWaypoint [[(_pos select 0)+100*sin(_dir),(_pos select 1)+100*cos(_dir),0],1];
