@@ -1,9 +1,12 @@
-
 pequod_var_heli = createVehicle [pequod_var_class,pequod_var_spawnpos,[],0,"FLY"];
+
 publicVariable "pequod_var_heli";
 createVehicleCrew pequod_var_heli;
 
-pequod_var_heli setPosASL pequod_var_spawnpos;
+pequod_var_heli setPosASL [pequod_var_spawnpos select 0, pequod_var_spawnpos select 1, (pequod_var_spawnpos select 2)+100];
+if (pequod_var_spawnpoint) then {
+	[missionNamespace,pequod_var_heli,"Pequod"] call bis_fnc_addRespawnPosition;
+};
 
 pequod_var_heli addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
 pequod_var_heli addEventHandler ["Killed",{[] spawn pequod_fnc_respawn}];
