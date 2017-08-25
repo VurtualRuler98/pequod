@@ -16,7 +16,7 @@ _pos = getPosASL _ply;
 while {_wait} do {
 
 
-	if (_chute distance2D pequod_var_heli<50 and (getPosATL pequod_var_heli select 2)>50) then {
+	if (_chute distance2D pequod_var_heli<100 and (getPosATL pequod_var_heli select 2)>50) then {
 		deleteVehicle _chute;
 		if (pequod_var_heli emptyPositions "cargo" > 0) then {
 		[_ply] spawn pequod_fnc_fulton_lift; 
