@@ -8,12 +8,8 @@ _txt = markerText _marker;
 
 
 if (_txt=="Helicopter LZ") then {
-	pequod_var_current_lz=nil;
-	group pequod_var_heli setCombatMode pequod_var_roe;
+	[] call pequod_fnc_clearobj;
 	[pequod_var_heli,"This is Pequod, on route to specified LZ!"] remoteExec ["sideChat"];
-	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
-	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
-	pequod_var_heli land "NONE";
 	_wp = group pequod_var_heli addWaypoint [getmarkerpos _marker, 0];
 	_wp setWaypointType "MOVE";
 	_wp setWaypointCompletionRadius 10;
@@ -24,12 +20,8 @@ if (_txt=="Helicopter LZ") then {
 
 
 if (_txt=="Helicopter Hover") then {
-	pequod_var_current_lz=nil;
-	group pequod_var_heli setCombatMode pequod_var_roe;
+	[] call pequod_fnc_clearobj;
 	[pequod_var_heli,'This is Pequod, on route to specified position!'] remoteExec ['sideChat'];
-	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
-	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
-	pequod_var_heli land "NONE";
 	_wp = group pequod_var_heli addWaypoint [getmarkerpos _marker, 0];
 	_wp setWaypointType "MOVE";
 	_wp setWaypointCompletionRadius 0;
@@ -40,12 +32,8 @@ if (_txt=="Helicopter Hover") then {
 
 
 if (_txt=="Helicopter RTB") then {
-	pequod_var_current_lz=nil;
-	group pequod_var_heli setCombatMode pequod_var_roe;
+	[] call pequod_fnc_clearobj;
 	[pequod_var_heli,'This is Pequod, returning to base!'] remoteExec ['sideChat'];
-	[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
-	{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
-	pequod_var_heli land "NONE";
 	_wp = group pequod_var_heli addWaypoint [getmarkerpos _marker, 0];
 	_wp setWaypointType "MOVE";
 	pequod_var_heli flyinHeight 100;

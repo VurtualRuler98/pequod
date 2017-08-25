@@ -2,12 +2,9 @@ _pos = param [0,[0,0,0],[[]],[2,3]];
 
 if (!alive pequod_var_heli) exitWith {true};
 
+[] call pequod_fnc_clearobj;
 [pequod_var_heli,"This is Pequod, I'm coming in hot, find cover!"] remoteExec ['sideChat'];
-pequod_var_current_lz=nil;
 
-[group pequod_var_heli,currentWaypoint group pequod_var_heli] setWaypointStatements ["true",""];
-{deleteWaypoint _x} forEach waypoints group pequod_var_heli;
-pequod_var_heli land "NONE";
 
 _wp = group pequod_var_heli addWaypoint [_pos, 0];
 _wp setWaypointType "HOLD";
