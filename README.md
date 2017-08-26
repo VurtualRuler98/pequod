@@ -1,8 +1,9 @@
 # pequod
-Simple Metal Gear style "Pequod" helicopter scripts for Arma 3.
+### Simple Metal Gear style "Pequod" helicopter scripts for Arma 3.
 
-To use this, you need to clone or download the scripts into a directory in your Arma mission.
-Ideally, name this directory "pequod", the path like so: "missionname.terrain/pequod/fn_init.sqf"
+To use these scripts, you need to clone or download the scripts into a directory in your Arma mission.
+Ideally, name this directory "pequod", the path like so: 
+		"missionname.terrain/pequod/fn_init.sqf"
 
 Include the header file in your cfgFunctions in description.ext:
 
@@ -10,19 +11,19 @@ Include the header file in your cfgFunctions in description.ext:
 
 or if you don't have one, stick this whole chunk in it:
 
-  class cfgFunctions {
-	  #include "pequod\pequod_fnc.hpp"
-  };
+ 	 class cfgFunctions {
+	  	#include "pequod\pequod_fnc.hpp"
+	  };
 
 Then create a suitable helicopter in the editor(ideally, empty, as it will be deleted upon mission start) and put this in the init:
 
-  [this] call pequod_fnc_init;
+ 	 [this] call pequod_fnc_init;
 
 The total available parameters are as follows:
 
-[vehicle,landed,respawn,curator] call pequod_fnc_init;
+	[vehicle,landed,respawn,curator] call pequod_fnc_init;
 
-vehicle: default null (required)
+#vehicle: default null (required)
 The vehicle object to use as a base for pequod's helicopter. It must be a helicopter.
 The vehicle specified will be deleted and its classname and position will be used for the spawned pequod.
 Adding other scripts, settings, etc. to it will be pointless.
@@ -40,7 +41,7 @@ Adding other scripts, settings, etc. to it will be pointless.
  Any player inside pequod can use an action to "connect" and play as the curator, then "disconnect" to let someone else use it.
  Exiting pequod will disconnect you.
  
- 
+## COMMANDING
 Pequod is useless without commands, and the easiest way to make pequod controllable is to make a radio trigger:
 
 Create a trigger in the editor with an activation of, eg, "Radio Alpha", set it to repeatable, and put this in the activation:
@@ -62,7 +63,7 @@ If you want to use only limited functions of pequod, you can pass other strings 
 
 
 
-PEQUOD MARKERS:
+## PEQUOD MARKERS
 
 By creating markers in the editor with names starting with "pequod_", you can define pre-planned objectives for Pequod.
 These markers will be automatically hidden on mission start, and only show in the "marker" command map.
