@@ -1,4 +1,0 @@
-respawnOnStart = 0;
-class cfgFunctions {
-	#include "pequod\pequod_fnc.hpp"
-};
