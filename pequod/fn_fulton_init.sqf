@@ -1,6 +1,6 @@
 _ply = param [0,objNull,[objNull]];
 
-if (isNull _veh || not (_veh isKindOf "Man")) exitWith {["Only valid humans can use fultons."] call bis_fnc_error; false};
+if (isNull _ply || not (_ply isKindOf "Man")) exitWith {["Only valid humans can use fultons."] call bis_fnc_error; false};
 
 [_ply,
 "Launch Fulton Balloon",
