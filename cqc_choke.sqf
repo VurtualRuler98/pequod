@@ -1,0 +1,33 @@
+(_this select 0) setVariable ["cqc_choke_tgt",objNull];
+[_this select 0,
+"CQC choke",
+"",
+"",
+"(_this == _target) && !(isNull (_target getVariable 'cqc_choke_tgt')) &&  (_target getVariable 'cqc_choke_tgt') in attachedObjects _target",
+"true",
+{},
+{(_this select 0) playMove "AmovPercMstpSrasWpstDnon_SaluteOut";},
+{_tgt = (_this select 0) getVariable "cqc_choke_tgt"; [_tgt,true,60,true] remoteExec ["ace_medical_fnc_setUnconscious",_tgt]; (_this select 0) forceWalk false; _tgt attachTo [_this select 0,[0,1,0]]; detach _tgt; (_this select 0) setVariable ["cqc_Choke_tgt",objNull];},
+{},
+[],
+5,
+99,
+false,
+false ] call bis_fnc_holdActionAdd;
+[_this select 0,
+"CQC grab",
+"",
+"",
+"(_this == _target) && (cursorTarget distance _target<2) && (cursorTarget isKindOf 'Man') && (isNull attachedTo cursorTarget) && !(cursorTarget getVariable 'ACE_isUnconscious') && ((isNull (_target getVariable 'cqc_choke_tgt')) || ((_target getVariable 'cqc_choke_tgt')==cursorTarget)) && ([position cursorTarget, (getDir cursorTarget)+180,60,position _target] call BIS_fnc_inAngleSector)",
+"true",
+{(_this select 0) setVariable ["cqc_choke_tgt",cursorTarget]; (_this select 0) forceWalk true;},
+{},
+{(_this select 0) getVariable "cqc_choke_tgt" attachTo [_this select 0,[0,0.5,0]]; if (!(cursorTarget getVariable "ACE_isUnconscious")) then {_tgt = cursorTarget; [_tgt,"acts_onchair_dead"] remoteExec ["switchMove",_tgt]};},
+{(_this select 0) setVariable ["cqc_choke_tgt",objNull]},
+[],
+0.5,
+99,
+false,
+false] call bis_fnc_holdActionAdd;
+
+_this select 0 addAction ["CQC let go",{_tgt = (_this select 0) getVariable "cqc_choke_tgt"; _tgt attachTo [_this select 0,[0,1,0]]; detach _tgt; (_this select 0) setVariable ["cqc_choke_tgt",objNull]; (_this select 0) forceWalk false; if (!(_tgt getVariable "ACE_isUnconscious")) then {[_tgt,""] remoteExec ["switchMove",_tgt]};},[],1,false,true,"","!(isNull ((_target) getVariable 'cqc_choke_tgt'))"];
