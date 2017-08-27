@@ -20,7 +20,7 @@ pequod_var_heli lockDriver true;
 {	_x allowDamage false;
 	if ((assignedVehicleRole _x select 0)=="Turret") then {
 		pequod_var_heli lockTurret [(assignedVehicleRole _x select 1),true];
-	}
+	};
 	_x setUnitAbility 100; //useless overkill
 } forEach pequod_var_crew;
 
