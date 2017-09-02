@@ -12,6 +12,7 @@ pequod_var_landspawn = _landed;
 pequod_var_class = typeOf _veh;
 pequod_var_spawnpos = [getPosASL _veh select 0,getPosASL _veh select 1,(getPosASL _veh select 2)];
 pequod_var_roe = "BLUE";
+pequod_var_smoke="";
 deleteVehicle _veh;
 [] call pequod_fnc_spawn;
 

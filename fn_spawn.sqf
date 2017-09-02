@@ -1,3 +1,4 @@
+pequod_var_smoke="";
 pequod_var_heli = createVehicle [pequod_var_class,pequod_var_spawnpos,[],0,"FLY"];
 
 publicVariable "pequod_var_heli";

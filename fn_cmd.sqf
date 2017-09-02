@@ -1,19 +1,33 @@
 _cmd = param [0,"",[""]];
 
 MENU_PEQUOD_CMD = [
-	["Pequod",true],
-	["Contact Pequod",[2],"",-5,[["expression","['marker'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (LZ by Smoke)",[3],"",-5,[["expression","['lzsmoke'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Loiter)",[4],"",-5,[["expression","['loiter'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Fire Support)",[5],"",-5,[["expression","['hot'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Recover Fulton)",[6],"",-5,[["expression","['fulton'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Supply Drop)",[7],"",-5,[["expression","['arsenal'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Smokescreen)",[8],"",-5,[["expression","['smokescreen'] call pequod_fnc_cmd"]],"1","1"],
-	["Contact Pequod (Set ROE)",[9],"",-5,[["expression","['roe'] call pequod_fnc_cmd"]],"1","1"]
+	["Pequod, ...",true],
+	["Designate LZ by...",[2],"",-5,[["expression","['menu_land'] call pequod_fnc_cmd"]],"1","1"],
+	//["Special air insertion...",[2],"",-5,[["expression","['menu_land'] call pequod_fnc_cmd"]],"1","1"],
+	["CAS requested...",[3],"",-5,[["expression","['menu_air'] call pequod_fnc_cmd"]],"1","1"],
+	["Air drop request at grid...",[4],"",-5,[["expression","['arsenal'] call pequod_fnc_cmd"]],"1","1"],
+	["Recover fulton near...",[5],"",-5,[["expression","['fulton'] call pequod_fnc_cmd"]],"1","1"],
+	["Change in SOP...",[6],"",-5,[["expression","['roe'] call pequod_fnc_cmd"]],"1","1"],
+	["Designate objective by...",[7],"",-5,[["expression","['smoke'] call pequod_fnc_cmd"]],"1","1"],
+	["RTB immediately.",[8],"",-5,[["expression","['rtb'] call pequod_fnc_cmd"]],"1","1"]
 ];
 
-MENU_PEQUOD_SMOKE_LAND = [
-	["Designate LZ by...",true],
+MENU_PEQUOD_LAND = [
+	["Pequod, Designate LZ by...",true],
+	["Marker...",[2],"",-5,[["expression","['marker'] call pequod_fnc_cmd"]],"1","1"],
+	["Smoke grenade near grid...",[3],"",-5,[["expression","['lzsmoke'] call pequod_fnc_cmd"]],"1","1"]
+	//["Coordinates at grid...",[4],"",-5,[["expression","['lzgrid'] call pequod_fnc_cmd"]],"1","1"]
+];
+MENU_PEQUOD_AIR = [
+	["Pequod, CAS requested...",true],
+	["Fire support at grid... ",[2],"",-5,[["expression","['hot'] call pequod_fnc_cmd"]],"1","1"],
+	["Smokescreen at grid...",[3],"",-5,[["expression","['smokescreen'] call pequod_fnc_cmd"]],"1","1"]
+
+];
+	
+
+MENU_PEQUOD_SMOKE = [
+	["Pequod, designate objective by...",true],
 	["Red smoke",[2],"",-5,[["expression","['smokeShellRed',player] remoteExecCall ['pequod_fnc_obj_smoke',pequod_var_heli];"]],"1","1"],
 	["Green smoke",[3],"",-5,[["expression","['smokeShellGreen',player] remoteExecCall ['pequod_fnc_obj_smoke',pequod_var_heli];"]],"1","1"],
 	["Yellow smoke",[4],"",-5,[["expression","['smokeShellYellow',player] remoteExecCall ['pequod_fnc_obj_smoke',pequod_var_heli];"]],"1","1"],
@@ -23,15 +37,25 @@ MENU_PEQUOD_SMOKE_LAND = [
 ];
 
 MENU_PEQUOD_ROE = [
-	["Pequod",true],
-	["Hold Fire",[2],"",-5,[["expression","['BLUE'] remoteExecCall ['pequod_fnc_roe',pequod_var_heli];"]],"1","1"],
-	["Fire at will",[3],"",-5,[["expression","['YELLOW'] remoteExecCall ['pequod_fnc_roe',pequod_var_heli];"]],"1","1"]
+	["Pequod, change in SOP, ...",true],
+	["Support ROE: Hold Fire.",[2],"",-5,[["expression","['BLUE'] remoteExecCall ['pequod_fnc_roe',pequod_var_heli];"]],"1","1"],
+	["Support ROE: Fire at Will.",[3],"",-5,[["expression","['YELLOW'] remoteExecCall ['pequod_fnc_roe',pequod_var_heli];"]],"1","1"]
 
 ];
 
 if (_cmd=="menu") then {
 	[] spawn {
 	showCommandingMenu "#USER:MENU_PEQUOD_CMD";
+	};
+};
+if (_cmd=="menu_land") then {
+	[] spawn {
+	showCommandingMenu "#USER:MENU_PEQUOD_LAND";
+	};
+};
+if (_cmd=="menu_air") then {
+	[] spawn {
+	showCommandingMenu "#USER:MENU_PEQUOD_AIR";
 	};
 };
 
@@ -43,7 +67,7 @@ if (_cmd=="marker") then {
 		[_pos,_this select 4] spawn {
 		_mouseover = (ctrlMapMouseOver (findDisplay 12 displayCtrl 51));
 		if (_mouseover select 0 == 'marker') then { 
-			private '_a'; _a = toArray (_mouseover select 1); _a resize 7; if (toString _a == 'pequod_' ) then { [_mouseover select 1] remoteExecCall ['pequod_fnc_obj_marker', pequod_var_heli];openMap[false,false];};
+			private '_a'; _a = toArray (_mouseover select 1); _a resize 7; if (toString _a == 'pequod_' ) then { [_mouseover select 1,player] remoteExecCall ['pequod_fnc_obj_marker', pequod_var_heli];openMap[false,false];};
 		};
 		};
 		},[_this]] call BIS_fnc_addStackedEventHandler;
@@ -57,8 +81,13 @@ if (_cmd=="marker") then {
 
 
 if (_cmd=="lzsmoke") then {
+	104 cutText ['Click the map to define the smoke area.','PLAIN DOWN',1];
+	openMap[true,false];
+	['fultonDrop','onMapSingleClick',{ [_pos] remoteExecCall ['pequod_fnc_obj_lzsmoke', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
 	[] spawn {
-	showCommandingMenu "#USER:MENU_PEQUOD_SMOKE_LAND";
+		waitUntil {!visibleMap};
+		['fultonDrop','onMapSingleClick'] call BIS_fnc_removeStackedEventHandler;
+		104 cutText ['','PLAIN DOWN',5];
 	};
 };
 
@@ -78,7 +107,7 @@ if (_cmd=="loiter") then {
 if (_cmd=="hot") then {
 	104 cutText ['Click the map to set an engagement area for Pequod','PLAIN DOWN',1];
 	openMap[true,false];
-	['fultonDrop','onMapSingleClick',{ [_pos] remoteExecCall ['pequod_fnc_obj_hot', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
+	['fultonDrop','onMapSingleClick',{ [_pos,player] remoteExecCall ['pequod_fnc_obj_hot', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
 	[] spawn {
 		waitUntil {!visibleMap};
 		['fultonDrop','onMapSingleClick'] call BIS_fnc_removeStackedEventHandler;
@@ -95,7 +124,7 @@ if (_cmd=="fulton") then {
 if (_cmd=="arsenal") then {
 	104 cutText ['Click the map to request a supply drop from Pequod','PLAIN DOWN',1];
 	openMap[true,false];
-	['fultonDrop','onMapSingleClick',{ [_pos] remoteExecCall ['pequod_fnc_obj_supply', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
+	['fultonDrop','onMapSingleClick',{ [_pos,player] remoteExecCall ['pequod_fnc_obj_supply', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
 	[] spawn {
 		waitUntil {!visibleMap};
 		['fultonDrop','onMapSingleClick'] call BIS_fnc_removeStackedEventHandler;
@@ -107,7 +136,7 @@ if (_cmd=="arsenal") then {
 if (_cmd=="smokescreen") then {
 	104 cutText ['Click the map to call in a smokescreen from Pequod','PLAIN DOWN',1];
 	openMap[true,false];
-	['fultonDrop','onMapSingleClick',{ [_pos] remoteExecCall ['pequod_fnc_obj_smokescreen', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
+	['fultonDrop','onMapSingleClick',{ [_pos,player] remoteExecCall ['pequod_fnc_obj_smokescreen', pequod_var_heli];openMap[false,false];},[_this]] call BIS_fnc_addStackedEventHandler;
 	[] spawn {
 		waitUntil {!visibleMap};
 		['fultonDrop','onMapSingleClick'] call BIS_fnc_removeStackedEventHandler;
@@ -118,5 +147,10 @@ if (_cmd=="smokescreen") then {
 if (_cmd=="roe") then {
 	[] spawn {
 	showCommandingMenu "#USER:MENU_PEQUOD_ROE";
+	};
+};
+if (_cmd=="smoke") then {
+	[] spawn {
+	showCommandingMenu "#USER:MENU_PEQUOD_SMOKE";
 	};
 };

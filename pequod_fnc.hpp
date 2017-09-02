@@ -11,6 +11,7 @@ class pequod {
 		class respawn {};
 		class obj_marker {};
 		class obj_smoke {};
+		class obj_lzsmoke {};
 		class obj_loiter {};
 		class obj_hot {};
 		class obj_fulton {};
@@ -22,5 +23,6 @@ class pequod {
 		class fulton_launch {};
 		class fulton_lift {};
 		class fulton_delete {};
+		class cqc_check {};
 	};
 };

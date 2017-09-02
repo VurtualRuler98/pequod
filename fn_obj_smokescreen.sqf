@@ -1,5 +1,8 @@
 _pos = param [0,[0,0,0],[[]],[2,3]];
-
+_ply = param [1,objNull,[objNull]];
+if !(isNull _ply) then {
+	[_ply,format ["Pequod, this is %1, CAS requested, smokescreen at grid: %2",_ply,mapGridPosition _pos]] remoteExec ["sideChat"];
+};
 if (!alive pequod_var_heli) exitWith {true};
 [] call pequod_fnc_clearobj;
 [pequod_var_heli,'This is Pequod, preparing to deploy smokescreen at the specified coordinates.'] remoteExec ['sideChat'];
