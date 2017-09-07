@@ -7,6 +7,7 @@ class pequod {
 		class roe {};
 		class acc {};
 		class spawn {};
+		class addaction {};
 		class clearobj {};
 		class respawn {};
 		class obj_marker {};
