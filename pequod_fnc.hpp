@@ -24,6 +24,7 @@ class pequod {
 		class obj_fulton_grid {};
 		class obj_supply {};
 		class obj_smokescreen {};
+		class obj_rtb {};
 		class smokescreen {};
 		class supply {};
 		class fulton_init {};

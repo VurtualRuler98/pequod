@@ -215,3 +215,8 @@ if (_cmd=="smoke") then {
 	showCommandingMenu "#USER:MENU_PEQUOD_SMOKE";
 	};
 };
+
+
+if (_cmd=="rtb") then {
+	[player] remoteExecCall ['pequod_fnc_obj_rtb', pequod_var_heli]
+};
