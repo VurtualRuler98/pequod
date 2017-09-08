@@ -1,5 +1,8 @@
+_ply = param [0,objNull,[objNull]];
 if (!alive pequod_var_heli) exitWith {true};
-
+if !(isNull _ply) then {
+	[_ply,format ["Pequod, this is %1, recover fulton near your current location.",_ply]] remoteExec ["sideChat"];
+};
 if (pequod_var_heli emptyPositions "cargo" == 0) exitWith {
 	[pequod_var_heli,"This is Pequod, passenger space is full, can't recover fulton."] remoteExec ['sideChat'];
 };

@@ -2,25 +2,15 @@ _pos = param [0,nil,[[]],[2,3]];
 if (isNil "_pos") then {_pos = getPosATL pequod_var_heli;};
 _cargo = "CargoNet_01_box_F" createVehicle (getPosATL pequod_var_heli);
 _cargo setPosATL [_pos select 0, _pos select 1, ((getPosATL pequod_var_heli) select 2)-5];
-_cargo addAction ["Arsenal",{["Open",true] spawn bis_fnc_arsenal;}];
-
-[_cargo,
-"Dispose of supplies",
-"",
-"",
-"isNull attachedTo _target",
-"true",
-{},
-{},
-{[_this select 0] remoteExec ["pequod_fnc_fulton_delete",_this select 0]},
-{},
-[],
-3,
-0,
-false,
-false ] call bis_fnc_holdActionAdd;
-
-
+[_cargo] remoteExec ["pequod_fnc_addaction_supply",0,_cargo call bis_fnc_netid];
+if (pequod_var_spawnpoint) then {
+	[missionNamespace,_cargo,"Supply drop"] call bis_fnc_addRespawnPosition;
+};
+[_cargo,_cargo call bis_fnc_netid] spawn {
+	params ["_cargo","_id"];
+	waitUntil { isNull _cargo };
+	remoteExec ["",_id];
+};
 [_cargo] spawn {
 	sleep 1;
 	_cargo = _this select 0;
