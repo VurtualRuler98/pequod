@@ -28,7 +28,7 @@ _wp = group pequod_var_heli addWaypoint [pequod_var_spawnpos, 0];
 _wp setWaypointType "LOITER";
 _wp setWaypointLoiterRadius 500;
 group pequod_var_heli setCurrentWaypoint _wp;
-
+driver pequod_var_heli setVariable ["VCOM_NOPATHING_Unit",1,false];
 [pequod_var_heli,"This is Pequod, I have arrived at the AO."] remoteExec ['sideChat'];
 
 true;
