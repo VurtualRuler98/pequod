@@ -8,6 +8,7 @@ class pequod {
 		class roe {};
 		class acc {};
 		class spawn {};
+		class base {};
 		class addaction {};
 		class addaction_supply {};
 		class clearobj {};

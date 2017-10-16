@@ -3,7 +3,7 @@ if (!isNull _ply && !(_ply isKindOf "Man")) exitWith {["ACC Boss must be a human
 if (isNull _ply) then {
 	unassignCurator pequod_var_curator;
 } else {
-	if (vehicle _ply == pequod_var_heli) then {
+	if (vehicle _ply == pequod_var_heli || vehicle _ply getVariable ["pequod_base",false]) then {
 		_ply assignCurator pequod_var_curator;
 	}
 };
