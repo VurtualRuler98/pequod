@@ -8,7 +8,9 @@ pequod_var_heli setPosASL [pequod_var_spawnpos select 0, pequod_var_spawnpos sel
 if (pequod_var_spawnpoint) then {
 	[missionNamespace,pequod_var_heli,"Pequod"] call bis_fnc_addRespawnPosition;
 };
-
+if (pequod_var_gomloadout) then {
+	pequod_var_heli spawn GOM_fnc_addAircraftLoadoutToObject; 
+};
 pequod_var_heli addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
 pequod_var_heli addEventHandler ["Killed",{[] spawn pequod_fnc_respawn}];
 [pequod_var_heli] remoteExec ["pequod_fnc_addaction",0,"pequod_addaction"];

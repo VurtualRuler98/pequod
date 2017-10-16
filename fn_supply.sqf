@@ -6,6 +6,9 @@ _cargo setPosATL [_pos select 0, _pos select 1, ((getPosATL pequod_var_heli) sel
 if (pequod_var_spawnpoint) then {
 	[missionNamespace,_cargo,"Supply drop"] call bis_fnc_addRespawnPosition;
 };
+if (pequod_var_gomloadout) then {
+	_cargo spawn GOM_fnc_addAircraftLoadoutToObject; 
+};
 [_cargo,_cargo call bis_fnc_netid] spawn {
 	params ["_cargo","_id"];
 	waitUntil { isNull _cargo };
