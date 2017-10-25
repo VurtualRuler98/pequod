@@ -8,8 +8,11 @@ pequod_var_heli setPosASL [pequod_var_spawnpos select 0, pequod_var_spawnpos sel
 if (pequod_var_spawnpoint) then {
 	[missionNamespace,pequod_var_heli,"Pequod"] call bis_fnc_addRespawnPosition;
 };
-if (pequod_var_gomloadout) then {
-	pequod_var_heli spawn GOM_fnc_addAircraftLoadoutToObject; 
+if (pequod_var_canloadout) then {
+	pequod_var_heli setVariable ["ace_rearm_isSupplyVehicle", true];
+	[pequod_var_heli, -10] call ace_refuel_fnc_makeSource;
+	pequod_var_heli setVariable ["ACE_isRepairFacility",true];
+	pequod_var_heli setVariable ["ACE_Medical_isMedicalFacility",true];
 };
 pequod_var_heli addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
 pequod_var_heli addEventHandler ["Killed",{[] spawn pequod_fnc_respawn}];
