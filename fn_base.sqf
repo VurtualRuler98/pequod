@@ -1,7 +1,7 @@
 params [["_base",objNull,[objNull]],["_spawn",false,[true]],["_loadout",false,[true]]];
 if (isNull _base) exitWith {["Base script target must be a valid object"] call bis_fnc_error; false};
 _base setVariable ["pequod_base",true,true];
-_base addEventHandler ["GetOut",{if (!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==(_this select 2)) then{ [nullObj] remoteExec ["pequod_fnc_acc",2];} }];
+_base addEventHandler ["GetOut",{if (!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==(_this select 2) && !([_this select 2] call pequod_fnc_canremote)) then{ [nullObj] remoteExec ["pequod_fnc_acc",2];} }];
 if (_spawn) then {
 	[missionNamespace,_base,"Mother Base"] call bis_fnc_addRespawnPosition;
 };

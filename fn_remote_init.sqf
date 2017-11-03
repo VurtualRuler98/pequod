@@ -1,0 +1,4 @@
+_ply = param [0,objNull,[objNull]];
+_ply addEventHandler ["Killed",{if (!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==(_this select 0)) then{ [nullObj] remoteExec ["pequod_fnc_acc",2];}}];
+_ply addAction ["Connect to ACC",{[_this select 1] remoteExec ["pequod_fnc_acc",2];},[],1.5,false,true,"","!(isNull pequod_var_curator) && (isNull getAssignedCuratorUnit pequod_var_curator) && vehicle _this == _this && ([_this] call pequod_fnc_canremote)"];
+_ply addAction ["Disconnect from ACC",{[nil] remoteExec ["pequod_fnc_acc",2];},[],1.5,false,true,"","!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==_this && vehicle _this == _this"];

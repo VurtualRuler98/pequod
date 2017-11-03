@@ -6,6 +6,7 @@ if (!isNull _cur) then {
 	pequod_var_curator = _cur;
 	publicVariable "pequod_var_curator";
 };
+pequod_var_remotes = ["B_UavTerminal","I_UavTerminal","O_UavTerminal","C_UavTerminal","CUP_B_UAVTerminal_Black"];
 [] remoteExec ["pequod_fnc_init_trigger",0,"pequod_trigger"];
 pequod_var_spawnpoint = _respawn;
 pequod_var_landspawn = _landed;

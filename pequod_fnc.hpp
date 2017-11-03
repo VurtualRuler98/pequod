@@ -4,11 +4,13 @@ class pequod {
 		class init {};
 		class init_trigger {};
 		class init_map {postInit=1;};
+		class remote_init {};
 		class cmd {};
 		class roe {};
 		class acc {};
 		class spawn {};
 		class base {};
+		class canremote {};
 		class addaction {};
 		class addaction_supply {};
 		class clearobj {};

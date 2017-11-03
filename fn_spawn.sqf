@@ -18,7 +18,7 @@ pequod_var_heli addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}];
 pequod_var_heli addEventHandler ["Killed",{[] spawn pequod_fnc_respawn}];
 [pequod_var_heli] remoteExec ["pequod_fnc_addaction",0,"pequod_addaction"];
 
-pequod_var_heli addEventHandler ["GetOut",{if (!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==(_this select 2)) then{ [nullObj] remoteExec ["pequod_fnc_acc",2];} }];
+pequod_var_heli addEventHandler ["GetOut",{if (!(isNull pequod_var_curator) && (getAssignedCuratorUnit pequod_var_curator)==(_this select 2) && !([_this select 2] call pequod_fnc_canremote)) then{ [nullObj] remoteExec ["pequod_fnc_acc",2];} }];
 pequod_var_heli addEventHandler ["GetOut",{if (pequod_var_heli==_this select 0) then {if ((_this select 1) in pequod_var_crew) then {[] call pequod_fnc_respawn;};};}];
 pequod_var_crew = crew pequod_var_heli;
 pequod_var_heli lockDriver true;
